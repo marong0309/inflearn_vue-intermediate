@@ -1,8 +1,9 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem" class="shadow">
-        {{ todoItem }}
+      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+       <i class="checkBtn fa-solid fa-check" v-bind:class="{checkBtnCompleted: todoItem.completed}" v-on:click="toggleComplete(todoItem, index)"></i>
+        <span v-bind:class="{textCompleted: todoItem.completed }">{{ todoItem.item }}</span>
         <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
           <i class="fa-solid fa-trash-can"></i>
         </span>
@@ -23,16 +24,20 @@ export default {
       console.log(todoItem, index);
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index, 1) // index에서 몇개(1개)를 지우겠다
+    },
+    toggleComplete: function(todoItem){
+      todoItem.completed = !todoItem.completed;
+      // 로컬 스토리지의 데이틀를
+      localStorage.removeItem(todoItem.item)
+      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     }
   },
   created: function(){
     if (localStorage.length > 0){
       for(var i = 0; i < localStorage.length; i ++){
         if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-          if(localStorage.key(i) !== ''){
-            this.todoItems.push(localStorage.key(i));
-            // console.log(localStorage.key(i));
-          }
+             this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
+            // console.log(localStorage.key(i));        
         }
       }
     }
@@ -58,6 +63,10 @@ export default {
     background: white;
     border-radius: 5px;
   }
+  .removeBtn{
+    margin-left: auto;
+    color: #dc4343;
+  }  
   .checkBtn{
     line-height: 45px;
     color: #62acde;
@@ -69,9 +78,5 @@ export default {
   .textCompleted{
     text-decoration: line-through;
     color: #b3adad;
-  }
-  .removeBtn{
-    margin-left: auto;
-    color: #dc4343;
   }  
 </style>

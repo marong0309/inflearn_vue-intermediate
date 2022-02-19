@@ -16,10 +16,15 @@ export default {
     }
   },
   methods: {
-    addTodo: function(){      
+    addTodo: function(){
+      if (this.newTodoItem !== ''){      
+      let obj = {completed: false, item: this.newTodoItem};
       //this는 todoinput component를 가리킴
-      localStorage.setItem(this.newTodoItem, this.newTodoItem);
-      this.clearInput();      
+      // localStorage.setItem(this.newTodoItem, obj));
+      // 위처럼 쓰면 obj의 값을 알수가 없다.
+      localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+      this.clearInput();
+      }      
     },
     clearInput : function(){
       this.newTodoItem = '';
