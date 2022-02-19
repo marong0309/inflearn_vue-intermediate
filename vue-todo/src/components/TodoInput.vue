@@ -17,12 +17,9 @@ export default {
   },
   methods: {
     addTodo: function(){
-      if (this.newTodoItem !== ''){      
-      let obj = {completed: false, item: this.newTodoItem};
-      //this는 todoinput component를 가리킴
-      // localStorage.setItem(this.newTodoItem, obj));
-      // 위처럼 쓰면 obj의 값을 알수가 없다.
-      localStorage.setItem(this.newTodoItem, JSON.stringify(obj));
+      if (this.newTodoItem !== ''){   
+        // this.$emit('이벤트 이름', 인자, 인자)         
+        this.$emit('addTodoItem', this.newTodoItem)
       this.clearInput();
       }      
     },
