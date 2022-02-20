@@ -48,7 +48,7 @@ export default {
     // methods를 분할
   },
    components:{
-      Modal: Modal
+      Modal
     }
 }
 </script>
