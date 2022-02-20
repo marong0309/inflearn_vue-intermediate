@@ -25,7 +25,7 @@ export default {
   },
   methods:{
     addOneItem: function(todoItem){
-      let obj = {completed: false, item: todoItem};
+      const obj = {completed: false, item: todoItem};
       //this는 todoinput component를 가리킴
       // localStorage.setItem(this.newTodoItem, obj));
       // 위처럼 쓰면 obj의 값을 알수가 없다.
