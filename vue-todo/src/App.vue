@@ -47,16 +47,7 @@ export default {
       this.todoItems = [];
     }
   }, // 최상위 컴포넌트에서 기능적인 측면을 묶고, 각각의 컴포넌트에는 형태만 갖추는 식으로 구성하는게 데이터가 꼬이지않는다. 중앙관리식의 데이터 조작, 한 컴포넌트에서 데이터를 갖고 다른 컴포넌트는 데이터의 요청만 한다. 
-  created(){
-    if (localStorage.length > 0){
-      for(var i = 0; i < localStorage.length; i ++){
-        if (localStorage.key(i) !== 'loglevel:webpack-dev-server'){
-             this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-            // console.log(localStorage.key(i));        
-        }
-      }
-    }
-  },
+  
  components : {
   TodoHeader,
   TodoInput,
